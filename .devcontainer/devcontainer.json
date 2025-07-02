@@ -1,0 +1,45 @@
+{
+  "name": "C++ Codespace Template",
+  "image": "mcr.microsoft.com/devcontainers/cpp:latest",
+  // You can also specify a more precise version like "mcr.microsoft.com/devcontainers/cpp:1-ubuntu-22.04"
+  // or build from a Dockerfile if you need highly custom dependencies.
+
+  "features": {
+    // Add common tools you might want pre-installed
+    "ghcr.io/devcontainers/features/github-cli:1": {}, // GitHub CLI for interacting with GitHub
+    "ghcr.io/devcontainers/features/vcpkg:1": {} // If you use vcpkg for package management
+  },
+
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Project-specific VS Code settings that override user settings
+        "C_Cpp.default.cppStandard": "c++20",
+        "C_Cpp.default.cStandard": "c17",
+        "editor.formatOnSave": true, // Automatically format code on save
+        "C_Cpp.clang_format_fallbackStyle": "Google", // Example: set clang-format style
+        "files.associations": { // Example: treat .hpp as C++ header
+          "*.hpp": "cpp"
+        }
+      },
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "llvm-vs-code-extensions.vscode-lldb", // If you prefer LLDB for debugging
+        "cschlosser.doxdocgen", // For Doxygen comments
+        "esbenp.prettier-vscode" // If you use Prettier for other files (e.g. JSON, Markdown)
+      ]
+    }
+  },
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // This is great for installing project-specific dependencies that aren't
+  // part of the base image or features.
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y doxygen graphviz", // Example for Doxygen generation
+
+  // Forward any ports your C++ application might use (e.g., a web server if applicable)
+  // "forwardPorts": [3000],
+
+  // Set a remote user if you don't want to run as root (default for dev containers is a non-root user)
+  // "remoteUser": "codespace" // This is often the default or handled by the image
+}
